@@ -1,5 +1,8 @@
 #lang sicp
 
+
+; 1.2
+
 (define (factorial n)
   (if (= n 1)
       1
@@ -7,21 +10,37 @@
 
 (factorial 5)
 
+"Excercise 1.9"
+
 ;(define (+ a b)
 ;  (if (= a 0)
 ;      b
-;      (inc (+ (dec a) b))))*/
+;      (inc (+ (dec a) b))))
 
-(define (+ a b)
-  (if (= a 0)
-      b
-      (+ (dec a) (inc b))))
+;(define (+ a b)
+;  (if (= a 0)
+;      b
+;      (+ (dec a) (inc b))))
 
 (+ 5 6)
 
+"Excercise 1.10"
+(define (A x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (A (- x 1)
+                 (A x (- y 1))))))
+
+(A 1 10)
+(A 2 4)
+(A 3 3)
+
+"Размен денег"
 (define (count-change amount)
   (cc amount 5))
 (define (cc amount kinds-of-coins)
+  ;(printf "~a ~a \n" amount kinds-of-coins)
   (cond ((= amount 0) 1)
         ((or (< amount 0) (= kinds-of-coins 0)) 0)
         (else (+ (cc amount
@@ -38,6 +57,55 @@
 
 (count-change 100)
 
+"Excercise 1.11"
+
+(define (f n)
+  (if (> n 3)
+      n
+      (+ (f (- n 1))
+         (f (- n 2))
+         (f (- n 3))))
+  )
+
+(f 272)
+
+(define (f-iterative n)
+  (define (f-i a b c count) 
+     (if (= count 0)
+         n 
+         (f-i (+ a b c) a b (- count 1))))
+   (f-i 2 1 0 n))
+(f-iterative 272)
+
+"Excercise 1.12"
+(define (paskal row col)
+  (if (or (= col 1) (= row col))
+      1
+      (+ (paskal (- row 1) col)
+         (paskal (- row 1) (- col 1)))))
+
+(paskal 5 3)
+
+
+"Excercise 1.13"
+;TODO:
+
+"Excercise 1.14"
+;TODO:
+
+"Excercise 1.15"
+(define (cube x)
+  (* x x x))
+(define (p x)
+  (- (* 3 x) (* 4 (cube x))))
+(define (sine angle)
+  (if (not (> (abs angle) 0.1))
+      angle
+      (p (sine (/ angle 3.0)))))
+
+(sine 12.15)
+
+"1.2.4"
 (define (expt b n)
   (if (= n 0)
       1
@@ -58,3 +126,8 @@
   (* x x))
 
 (fast-expt 2 8)
+
+"Excercise 1.16"
+
+
+"Excercise 1.17"
