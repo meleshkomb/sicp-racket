@@ -45,3 +45,13 @@
 (print-rat (add-rat one-half one-third))
 (print-rat (mul-rat one-half one-third))
 (print-rat (add-rat one-third one-third))
+
+"exercise 2.1"
+(define (sign x) 
+  (cond ((> x 0) 1) 
+        ((< x 0) -1) 
+        (else 0)))
+(define (make-rat2 n d) 
+  (let ((g (* (gcd (abs n) (abs d)) (sign d)))) 
+    (cons (/ n g) (/ d g))))
+
