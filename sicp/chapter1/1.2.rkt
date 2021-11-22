@@ -128,6 +128,61 @@
 (fast-expt 2 8)
 
 "Excercise 1.16"
+(define (fast-expt2 b n) 
+  (fast-expt-iter 1 b n))
+(define (fast-expt-iter a b n) 
+  (if (= n 0) 
+      a 
+      (if (even? n) 
+          (fast-expt-iter a
+                          (square b) (/ n 2)) 
+          (fast-expt-iter (* a b)
+                          b (- n 1)))))
+(fast-expt2 2 8)
 
 
 "Excercise 1.17"
+(define (fix-* a b)
+  (define (double n)
+    (+ n n))
+  (define (halve n)
+    (/ n 2))
+  
+  (cond ((= b 0) 0) 
+        ((= b 1) a) 
+        ((even? b) (double
+                    (fix-* a
+                            (halve b)))) 
+        (else (+ a
+                 (fix-* a
+                         (- b 1)))))
+  )
+(fix-* 2 10)
+
+"Excercise 1.18"
+(define (fast-* a b) 
+  (fast-*-iter a b 0))
+
+(define (fast-*-iter a b c)
+  (define (double n)
+    (+ n n))
+  (define (halve n)
+    (/ n 2))
+  
+  (cond ((= b 0) c) 
+        ((even? b) (fast-*-iter
+                    (double a) (halve b) c)) 
+        (else (fast-*-iter a
+                           (- b 1) (+ c a))))
+  )
+(fast-* 30 30) 
+
+"Excercise 1.19"
+
+"Excercise 1.20"
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+(gcd 206 40)
+
